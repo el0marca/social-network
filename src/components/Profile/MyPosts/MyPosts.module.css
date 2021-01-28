@@ -1,8 +1,8 @@
-/* .my_posts {
-    width: 100%;
-} */
+.myPosts {
+    padding: 10px;    
+}
 
-.my_posts button {
+.myPosts button {
     margin-left: 600px;
     width: 70px;
     text-align: left;

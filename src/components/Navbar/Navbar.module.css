@@ -3,10 +3,39 @@
   background-color: skyblue;
 }
 
-.nav a {
-  color: #fff;
+.item {
+  margin: 7px auto;
+  /* text-align: center; */
+  padding: 0px 20px;
 }
 
-.nav .active{
-  background-color: green;
+.nav a {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+a.active{
+  color: gold;
+}
+
+.wrapperSetting{
+  padding: 0px 20px;
+  padding-top: 20px;
+}
+
+.wrapperFriends {
+  padding: 0px 20px;
+  padding-top: 60px;
+}
+.wrapperFriends a {
+  font-size: 27px;
+}
+.friends {
+  display: flex;
+  justify-content:center;
+  padding-top: 10px;
+  font-size: 12px;
+
 }

@@ -3,7 +3,7 @@ import s from './Header.module.css'
 
 const Header = () => {
     return <header className={s.header}>
-        <img src="https://www.vikiweb.ru/images/sozdanie-logotipa.png" alt="" />
+        <img src="https://pngquant.org/Ducati_side_shadow-fs8.png" alt="1" />
     </header>
 }
 

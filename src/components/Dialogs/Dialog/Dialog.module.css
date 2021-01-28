@@ -1,0 +1,16 @@
+.dialogItem img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    padding-right: 10px;
+}
+.dialogItem a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items:center
+}
+
+.dialogItem {
+    margin-bottom: 10px;
+}
