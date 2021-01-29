@@ -5,11 +5,11 @@ const ProfileInfo = () => {
     return (
         <div className={s.wrapper}>
             <div className={s.header}>
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="" />
+                <img src="https://www.softrew.ru/wp-content/cache/thumb/10/5e83bf23e42db10_810x260.png" alt="" />
             </div>
             <div className={s.profileInfo}>
                 <div className={s.avatar}>
-                    <img src="https://geo-media.beatport.com/image_size/300x300/49013d6b-8a63-4222-9822-cf0e689cfb43.jpg" alt="" />
+                    <img src="https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" alt="" />
                 </div>
                 <div className={s.info}>
                     <h3>Dmitry K.</h3>

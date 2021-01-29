@@ -11,15 +11,26 @@ import Messages from './Message/Message';
 
 const Dialogs = (props) => {
     const messageData = props.messages.map(d => <Messages message={d.message} />);
-    const dialogsData= props.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img}/>);
+    const dialogsData = props.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
+
+    const newPostElement=React.createRef();
+    const send=()=>{
+        const text =newPostElement.current.value;
+        props.PostMessage(text)
+    }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsWrapper}>
-                {dialogsData} 
+                {dialogsData}
             </div>
             <div className="messages">
                 {messageData}
+                <div className={s.textArea}><textarea ref={newPostElement}></textarea>
+                    <div>
+                        <button onClick={send}>send</button>
+                    </div>
+                </div>
             </div>
         </div>
 

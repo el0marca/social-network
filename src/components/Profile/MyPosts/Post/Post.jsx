@@ -5,7 +5,7 @@ const Post = ({ message, likesCount }) => {
     return (
         <div className={s.item}>
             <div>
-                <img src="https://geo-media.beatport.com/image_size/300x300/49013d6b-8a63-4222-9822-cf0e689cfb43.jpg" alt="" />
+                <img src="https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" alt="" />
                 {message}
             </div>
             <span>Like {likesCount}</span>

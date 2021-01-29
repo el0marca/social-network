@@ -2,3 +2,9 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
 }
+.textArea {
+    margin-top: 20px;
+}
+.textArea button {
+    margin-left: 120px;
+}

@@ -1,3 +1,5 @@
+import {renderEntireTree} from '../render';
+
 const state={dialogsPage:{
     dialogs:[{name:'Alex',id:'1', img:'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg', altImg:'1'},
     {name:'John',id:'2', img:'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', altImg:'2'},
@@ -26,6 +28,12 @@ const state={dialogsPage:{
     img: 'https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png',
     altImg: 'Peter',
     id: '3'}]
-    }}
+    }};
+
+    export const PostMessage=(text)=>{
+        const message={id:5,message:text}
+        state.dialogsPage.messages.push(message)
+        renderEntireTree(state, PostMessage);
+    }
     
 export default state;  

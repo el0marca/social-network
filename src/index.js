@@ -1,14 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App/App.jsx';
-import './index.css';
-import state from './redux/state'
+import state from './redux/state.js';
+import {renderEntireTree} from './render.js';
+import {PostMessage} from './redux/state.js';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state={state}/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+renderEntireTree(state,PostMessage);
 
