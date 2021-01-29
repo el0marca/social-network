@@ -1,6 +1,7 @@
 import state from './redux/state.js';
-import {renderEntireTree} from './render.js';
-import {PostMessage} from './redux/state.js';
+import { renderEntireTree } from './render.js';
 
-renderEntireTree(state,PostMessage);
+
+renderEntireTree(state)
+
 

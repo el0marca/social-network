@@ -10,13 +10,19 @@ import Messages from './Message/Message';
 
 
 const Dialogs = (props) => {
-    const messageData = props.messages.map(d => <Messages message={d.message} />);
-    const dialogsData = props.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
+    const messageData = props.dialogsPage.messages.map(d => <Messages message={d.message} />);
+    const dialogsData = props.dialogsPage.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
+ 
+    let newPostElement=React.createRef();
 
-    const newPostElement=React.createRef();
     const send=()=>{
-        const text =newPostElement.current.value;
+        let text = newPostElement.current.value;
         props.PostMessage(text)
+    }
+
+    const onPostChange=()=>{
+        let text=newPostElement.current.value;
+        props.updateNewMessageText(text)
     }
 
     return (
@@ -26,7 +32,7 @@ const Dialogs = (props) => {
             </div>
             <div className="messages">
                 {messageData}
-                <div className={s.textArea}><textarea ref={newPostElement}></textarea>
+                <div className={s.textArea}><textarea onChange={onPostChange} value={props.dialogsPage.newMessageText} ref={newPostElement}></textarea>
                     <div>
                         <button onClick={send}>send</button>
                     </div>
