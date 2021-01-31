@@ -16,15 +16,12 @@ const Dialogs = (props) => {
     let newPostElement=React.createRef();
 
     const send=()=>{
-        let text = newPostElement.current.value;
-        props.PostMessage(text)
+        props.PostMessage()
     }
-
     const onPostChange=()=>{
         let text=newPostElement.current.value;
-        props.updateNewMessageText(text)
+        props.updateNewMessageText(text);
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsWrapper}>
@@ -39,7 +36,6 @@ const Dialogs = (props) => {
                 </div>
             </div>
         </div>
-
     )
 }
 

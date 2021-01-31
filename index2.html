@@ -41,3 +41,38 @@ header, footer, article, nav, div {
   <div id="siteAds">Ads</div>
   <footer id="pageFooter">Footer</footer>
 </body>
+
+export let PostMessage=()=>{
+  let newMessage = {id:5, message:state.dialogsPage.newMessageText}
+  state.dialogsPage.messages.push(newMessage)
+  renderEntireTree(state);
+  state.dialogsPage.newMessageText='';
+}
+export let updateNewMessageText=(newText)=>{
+  state.dialogsPage.newMessageText=newText;
+  renderEntireTree(state);
+}
+
+let newPostElement=React.createRef();
+
+const send=()=>{
+    props.PostMessage()
+}
+
+const onPostChange=()=>{
+    let text=newPostElement.current.value;
+    props.updateNewMessageText(text);
+}
+
+return (
+    <div className={s.dialogs}>
+        <div className={s.dialogsWrapper}>
+            {dialogsData}
+        </div>
+        <div className="messages">
+            {messageData}
+            <div className={s.textArea}><textarea onChange={onPostChange} value={props.dialogsPage.newMessageText} ref={newPostElement}></textarea>
+                <div>
+                    <button onClick={send}>send</button>
+                </div>
+            </div>
