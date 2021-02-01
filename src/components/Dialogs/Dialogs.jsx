@@ -15,13 +15,14 @@ const Dialogs = (props) => {
  
     let newPostElement=React.createRef();
 
-    const send=()=>{
-        props.PostMessage()
-    }
-    const onPostChange=()=>{
-        let text=newPostElement.current.value;
-        props.updateNewMessageText(text);
-    }
+const onPostChange=()=>{
+    let text=newPostElement.current.value;
+    props.dispatch({type:'UPDATE-NEW-MESSAGE-TEXT',newText:text})
+    // props.updateNewMessageText(text);
+};
+const send=()=>{
+    props.dispatch({type:'NEW-MESSAGE'})
+}
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsWrapper}>

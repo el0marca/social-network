@@ -1,11 +1,11 @@
 import React from 'react';
-import s from './ProfileInfo.module.css'
+import s from './ProfileInfo.module.css';
 
 const ProfileInfo = () => {
     return (
         <div className={s.wrapper}>
             <div className={s.header}>
-                <img src="https://www.softrew.ru/wp-content/cache/thumb/10/5e83bf23e42db10_810x260.png" alt="" />
+                <img src="https://pbs.twimg.com/profile_banners/801011723478175744/1479811563/1500x500" alt="1" />
             </div>
             <div className={s.profileInfo}>
                 <div className={s.avatar}>
