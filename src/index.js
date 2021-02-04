@@ -5,13 +5,13 @@ import App from './components/App/App';
 import store from './redux/reduxStore.js';
  
 const renderEntireTree=()=>{
-    ReactDOM.render(
+    ReactDOM.render (
         <BrowserRouter>
-          <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+            <App store={store} dispatch={store.dispatch.bind(store)} />
         </BrowserRouter>,
         document.getElementById('root')
       );
-}
+};
 renderEntireTree();
 
 store.subscribe(renderEntireTree);

@@ -48,5 +48,4 @@ let store ={
         this._rerenderEntireTree(this._state);
     },
 }
-
 // export default store;

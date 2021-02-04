@@ -3,25 +3,18 @@ import s from './Dialogs.module.css';
 import Dialog from './Dialog/Dialog';
 import Messages from './Message/Message';
 
-// let messagesData = [{ id: 1, message: 'Lets go to do it' },
-// { id: 2, message: 'Preview continue keep strong' },
-// { id: 3, message: 'Awesome state buy' },
-// { id: 4, message: 'Loading is true' }];
-
-
 const Dialogs = (props) => {
-    const messageData = props.dialogsPage.messages.map(d => <Messages message={d.message} />);
-    const dialogsData = props.dialogsPage.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
+    const messagesData= props.messagesData.map(d => <Messages message={d.message} />);
+    const dialogsData= props.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
  
     let newPostElement=React.createRef();
 
 const onPostChange=()=>{
     let text=newPostElement.current.value;
-    props.dispatch({type:'UPDATE-NEW-MESSAGE-TEXT',newText:text})
-    // props.updateNewMessageText(text);
+    props.postChange(text);
 };
 const send=()=>{
-    props.dispatch({type:'NEW-MESSAGE'})
+    props.newMessage();
 }
     return (
         <div className={s.dialogs}>
@@ -29,8 +22,8 @@ const send=()=>{
                 {dialogsData}
             </div>
             <div className="messages">
-                {messageData}
-                <div className={s.textArea}><textarea onChange={onPostChange} value={props.dialogsPage.newMessageText} ref={newPostElement}></textarea>
+                {messagesData}
+                <div className={s.textArea}><textarea placeholder='enter your message' onChange={onPostChange} value={props.newMessageText} ref={newPostElement}></textarea>
                     <div>
                         <button onClick={send}>send</button>
                     </div>
@@ -40,4 +33,4 @@ const send=()=>{
     )
 }
 
-export default Dialogs
+export default Dialogs;

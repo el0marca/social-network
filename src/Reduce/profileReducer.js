@@ -5,8 +5,11 @@ posts:[
 {message:"It's your third post",likesCount:'26'},
 {message:"It's your four post",likesCount:'67'}
 ],
-newPostText: "What's happening"};
+newPostText: ""
+};
 
+export const NewPostActionCreator=()=> ({type: 'NEW-POST'});
+export const UpdateNewPostTextActionCreator=(text)=>({type: 'UPDATE-NEW-POST-TEXT',newText: text}); 
 
 const profileReducer=(state=initialState,action)=>{
     switch (action.type) {
