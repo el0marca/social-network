@@ -12,18 +12,19 @@ const MyPosts = (props) => {
     const send=()=>{
         props.newPost();
     }
-    const postsData=props.posts.map(post=><Post message={post.message} likesCount={post.likesCount}/>);
+    const postsData=props.posts.map(post=><Post key={post.id} message={post.message} likesCount={post.likesCount}/>);
  
-    return <div className={s.myPosts}>
+    return (
+        <div className={s.myPosts}>
             <div>
                 <h3>My posts</h3>
-                <textarea placeholder='enter your message' ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea>
+                <textarea placeholder='Enter your message' ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea>
                 <p><button onClick={send}>send</button></p>
             </div>
             <div className={s.item}>
                 {postsData}
             </div>
-        </div>
+        </div> ) 
     }
 
 // создаем const newPostElement = React.createRef(); =>

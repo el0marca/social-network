@@ -1,0 +1,45 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    padding-bottom: 20px;
+}
+.wrapper img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    display: inline-block;
+}
+.wrapper button {
+    font-size: 19px;
+}
+.ava {
+    padding-right: 10px;
+    display: grid;
+    grid-template-rows: 60px 30px;
+}
+.follow {
+    padding-top: 10px;
+}
+.info {
+    padding: 10px;
+    width: 450px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: solid 1px;
+    border-radius: 10px 10px;
+}
+.name {
+    font-size: 20px;
+    font-weight: bold;
+}
+.status {
+    padding-top: 25px;
+}
+.location {
+    text-align: right;
+    font-weight: bold;
+    margin: auto 0px;
+}
+.country {
+    padding-bottom: 10px;
+}

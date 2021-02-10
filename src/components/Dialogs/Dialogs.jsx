@@ -4,14 +4,14 @@ import Dialog from './Dialog/Dialog';
 import Messages from './Message/Message';
 
 const Dialogs = (props) => {
-    const messagesData= props.messagesData.map(d => <Messages message={d.message} />);
-    const dialogsData= props.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} img={dialog.img} />);
+    const messagesData= props.messagesData.map(d => <Messages key={d.id} message={d.message} />);
+    const dialogsData= props.dialogsData.map(dialog => <Dialog name={dialog.name} key={dialog.id} img={dialog.img} />);
  
-    let newPostElement=React.createRef();
+    // let newPostElement=React.createRef();
 
-const onPostChange=()=>{
-    let text=newPostElement.current.value;
-    props.postChange(text);
+const onPostChange=(e)=>{
+    let text=e.target.value
+    props.postChange(text)
 };
 const send=()=>{
     props.newMessage();
@@ -23,7 +23,7 @@ const send=()=>{
             </div>
             <div className="messages">
                 {messagesData}
-                <div className={s.textArea}><textarea placeholder='enter your message' onChange={onPostChange} value={props.newMessageText} ref={newPostElement}></textarea>
+                <div className={s.textArea}><textarea placeholder='Enter your message' onChange={onPostChange} value={props.newMessageText}></textarea>
                     <div>
                         <button onClick={send}>send</button>
                     </div>
