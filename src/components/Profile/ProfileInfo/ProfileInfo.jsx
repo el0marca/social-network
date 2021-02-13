@@ -1,7 +1,11 @@
 import React from 'react';
+import Preloader from '../../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if(!props.profile){
+        return (<div className={s.preloader}><Preloader/></div>)
+    }
     return (
         <div className={s.wrapper}>
             <div className={s.header}>
@@ -9,14 +13,21 @@ const ProfileInfo = () => {
             </div>
             <div className={s.profileInfo}>
                 <div className={s.avatar}>
-                    <img src="https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" alt="" />
+                    <img src={props.profile.photos.large} alt="1" />
                 </div>
                 <div className={s.info}>
-                    <h3>Dmitry K.</h3>
-                    <p>Date of birth: 2 january <br />
-                       City: Minsk <br />
-                       Education: BSU'11 <br />
-                       Web-site: https://it.kamasutra.com</p>
+                    <h3>{props.profile.fullName}</h3>
+                    <p>{props.profile.aboutMe}<br /><br/>
+                        {props.profile.contacts.facebook?<li>facebook: {props.profile.contacts.facebook}</li> :null}
+                        {props.profile.contacts.website?<li>website: {props.profile.contacts.website}</li> :null}
+                        {props.profile.contacts.vk?<li>vk: {props.profile.contacts.vk}</li> :null}
+                        {props.profile.contacts.twitter?<li>twitter: {props.profile.contacts.twitter}</li> :null}                        
+                        {props.profile.contacts.instagram?<li>instagram: {props.profile.contacts.instagram}</li> :null}                        
+                        {props.profile.contacts.youtube?<li>youtube: {props.profile.contacts.youtube}</li> :null}
+                        {props.profile.contacts.github?<li>github: {props.profile.contacts.github}</li> :null}                        
+                        {props.profile.contacts.mainlink?<li>mainlink: {props.profile.contacts.mainlink}</li> :null}
+                       </p>
+                       <p>{props.profile.lookingForAJob? <li>В поисках работы: {props.profile.lookingForAJobDescription}</li>:null}</p>
                 </div>
             </div>
         </div>

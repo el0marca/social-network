@@ -25,19 +25,19 @@ let initialState = {
         }
     ],
     messages: [{
-            id: 1,
+            id: '1',
             message: 'Lets go to do it'
         },
         {
-            id: 2,
+            id: '2',
             message: 'Preview continue keep strong'
         },
         {
-            id: 3,
+            id: '3',
             message: 'Awesome state buy'
         },
         {
-            id: 4,
+            id: '4',
             message: 'Loading is true'
         }
     ],

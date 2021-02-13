@@ -1,39 +1,56 @@
 const FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
-    SET_USERS = 'SET-USERS',
-    SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+    SET_USERS = 'SET_USERS',
+    SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
+    SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT',
+    TOGGLE_IS_UPLOAD = 'TOGGLE_IS_UPLOAD';
 
 let initialState = {
     users: [],
     pageSize: 5,
     totalUserCount: 21,
-    currentPage: 1
+    currentPage: 1,
+    isUpload: false
 };
 
 export const followAC = (id) => {
     return {
         type: FOLLOW,
-        userId: id
+        id
     }
 }
 export const unfollowAC = (id) => {
     return {
         type: UNFOLLOW,
-        userId: id
+        id
     }
 }
 
 export const setUsersAC = (users) => {
     return {
         type: SET_USERS,
-        users: users
+        users
     }
 }
 
 export const setCurrentPage = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
-        currentPage: currentPage
+        currentPage
+    }
+}
+
+export const setTotalUserCount = (count) => {
+    return {
+        type: SET_TOTAL_USER_COUNT,
+        count
+    }
+}
+
+export const toggleIsUpload = (isUpload) => {
+    return {
+        type: TOGGLE_IS_UPLOAD,
+        isUpload
     }
 }
 
@@ -43,7 +60,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(u => {
-                    if (u.id === action.userId) return {
+                    if (u.id === action.id) return {
                         ...u,
                         followed: true,
                     }
@@ -54,7 +71,7 @@ const usersReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     users: state.users.map(u => {
-                        if (u.id === action.userId) return {
+                        if (u.id === action.id) return {
                             ...u,
                             followed: false,
                         }
@@ -66,12 +83,20 @@ const usersReducer = (state = initialState, action) => {
                         ...state,
                         users: action.users
                     }
-                    default:
-                        return state;
                     case SET_CURRENT_PAGE:
                         return {
                             ...state, currentPage: action.currentPage
                         }
+                        case SET_TOTAL_USER_COUNT:
+                            return {
+                                ...state, totalUserCount: action.count
+                            }
+                            case TOGGLE_IS_UPLOAD:
+                                return {
+                                    ...state, isUpload: action.isUpload
+                                }
+                                default:
+                                    return state;
     }
 }
 
