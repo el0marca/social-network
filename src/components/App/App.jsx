@@ -9,14 +9,15 @@ import Settings from '../Settings/Settings';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import UsersContainer from '../Users/UsersContainer';
 import ProfileContainer from '../Profile/ProfileContainer';
+import HeaderContainer from '../Header/HeaderContainer';
 
 function App(props) {
   return (
       <div className='app-wrapper'>
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/profile/:userId' render={()=> <ProfileContainer />} />
+          <Route path='/profile/:userId?' render={()=> <ProfileContainer />} />
           <Route path='/dialogs' render={()=><DialogsContainer />} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />

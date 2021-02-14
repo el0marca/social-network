@@ -3,8 +3,8 @@ import Preloader from '../../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 
 const ProfileInfo = (props) => {
-    if(!props.profile){
-        return (<div className={s.preloader}><Preloader/></div>)
+    if (!props.profile) {
+        return (<div className={s.preloader}><Preloader /></div>)
     }
     return (
         <div className={s.wrapper}>
@@ -14,20 +14,20 @@ const ProfileInfo = (props) => {
             <div className={s.profileInfo}>
                 <div className={s.avatar}>
                     <img src={props.profile.photos.large} alt="1" />
+                    <div>{props.profile.aboutMe}</div>
                 </div>
                 <div className={s.info}>
                     <h3>{props.profile.fullName}</h3>
-                    <p>{props.profile.aboutMe}<br /><br/>
-                        {props.profile.contacts.facebook?<li>facebook: {props.profile.contacts.facebook}</li> :null}
-                        {props.profile.contacts.website?<li>website: {props.profile.contacts.website}</li> :null}
-                        {props.profile.contacts.vk?<li>vk: {props.profile.contacts.vk}</li> :null}
-                        {props.profile.contacts.twitter?<li>twitter: {props.profile.contacts.twitter}</li> :null}                        
-                        {props.profile.contacts.instagram?<li>instagram: {props.profile.contacts.instagram}</li> :null}                        
-                        {props.profile.contacts.youtube?<li>youtube: {props.profile.contacts.youtube}</li> :null}
-                        {props.profile.contacts.github?<li>github: {props.profile.contacts.github}</li> :null}                        
-                        {props.profile.contacts.mainlink?<li>mainlink: {props.profile.contacts.mainlink}</li> :null}
-                       </p>
-                       <p>{props.profile.lookingForAJob? <li>В поисках работы: {props.profile.lookingForAJobDescription}</li>:null}</p>
+                    <p>{props.profile.contacts.facebook ? <li> facebook: <a href={props.profile.contacts.facebook}>{props.profile.contacts.facebook}</a></li> : null}
+                        {props.profile.contacts.website ? <li>website: {props.profile.contacts.website}</li> : null}
+                        {props.profile.contacts.vk ? <li>vk: {props.profile.contacts.vk}</li> : null}
+                        {props.profile.contacts.twitter ? <li>twitter: {props.profile.contacts.twitter}</li> : null}
+                        {props.profile.contacts.instagram ? <li>instagram: {props.profile.contacts.instagram}</li> : null}
+                        {props.profile.contacts.youtube ? <li>youtube: {props.profile.contacts.youtube}</li> : null}
+                        {props.profile.contacts.github ? <li>github: {props.profile.contacts.github}</li> : null}
+                        {props.profile.contacts.mainlink ? <li>mainlink: {props.profile.contacts.mainlink}</li> : null}
+                    </p>
+                    <p>{props.profile.lookingForAJob ? <li>В поисках работы: {props.profile.lookingForAJobDescription}</li> : null}</p>
                 </div>
             </div>
         </div>

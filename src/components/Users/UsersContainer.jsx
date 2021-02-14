@@ -13,6 +13,7 @@ class UsersComponent extends React.Component {
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&count=${this.props.currentPage}`).then(response => {
                 this.props.toggleIsUpload(false)
                 this.props.setUsersAC(response.data.items)
+                debugger
                 this.props.setTotalUserCount(response.data.totalCount)
             })
         }
@@ -53,8 +54,6 @@ const mapStateToProps = (state) => {
 //         setTotalUserCount: (count)=>{dispatch(setTotalUserCount(count))} 
 //     }
 // }
-
-
 const UsersContainer = connect(mapStateToProps, { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsUpload })(UsersComponent);
 
 export default UsersContainer;

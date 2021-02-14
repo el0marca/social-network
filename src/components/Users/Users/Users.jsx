@@ -4,10 +4,9 @@ import userPhoto from '../../../assets/images/user.jpg';
 import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
-
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
     let pages = [];
-    for (let i = 1; i <= pagesCount/100; i++) {
+    for (let i = 1; i <= pagesCount / 100; i++) {
         pages.push(i)
     }
     return (
