@@ -1,26 +1,33 @@
 const SET_USER_DATA = 'SET_USER_DATA',
-SET_LOGED='SET_LOGED'
-
+      SET_USER_PROFILE_PHOTO = 'SET_USER_PROFILE_PHOTO';
 
 let initialState = {
     id: null,
     login: null,
     email: null,
-    isLogged: false
+    isLogged: false,
+    profilePhoto: null
 }
 
-export const setUserData = (data, isLogged) => ({
+export const setAuthUserData = (data) => ({
     type: SET_USER_DATA,
-    data: data,
-    isLogged: isLogged
+    data: data
 })
 
+export const setAuthProfilePhoto =(photo)=>({
+    type: SET_USER_PROFILE_PHOTO,
+    photo
+})
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
-                ...state, ...action.data, isLogged: action.isLogged
+                ...state, ...action.data, isLogged: true
+            }
+        case SET_USER_PROFILE_PHOTO:
+            return {
+                ...state, profilePhoto:action.photo
             }
             default:
                 return state

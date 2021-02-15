@@ -1,36 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsUpload} from '../../Reduce/usersReducer';
-import axios from 'axios';
+import { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsUpload, toggleIsFollowing } from '../../Reduce/usersReducer';
 import Users from './Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './UsersContainer.module.css'
+import { usersAPI } from '../../api/api';
 
 class UsersComponent extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsUpload(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&count=${this.props.currentPage}`).then(response => {
+            usersAPI.getUsers(this.props.pageSize,this.props.currentPage)
+            .then(response => {
                 this.props.toggleIsUpload(false)
                 this.props.setUsersAC(response.data.items)
-                debugger
                 this.props.setTotalUserCount(response.data.totalCount)
             })
         }
     }
     onPageChanged = (pn) => {
         this.props.toggleIsUpload(true);
-        this.props.setCurrentPage(pn);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pn}`).then(response => {
-        this.props.toggleIsUpload(false);
-        this.props.setUsersAC(response.data.items) })
+        this.props.setCurrentPage(pn)
+        usersAPI.getUsers(this.props.pageSize, pn)
+        .then(response => {
+            this.props.toggleIsUpload(false);
+            this.props.setUsersAC(response.data.items)
+            this.props.setTotalUserCount(response.data.totalCount)
+        })
     }
 
     render() {
         return (
             <div className={s.wrapper}>
-                <div className={s.Preloader}>{this.props.isUpload?<Preloader />:null}</div>
-                <Users users={this.props.users} pageSize={this.props.pageSize} totalUserCount={this.props.totalUserCount} currentPage={this.props.currentPage} followAC={this.props.followAC} unfollowAC={this.props.unfollowAC} onPageChanged={this.onPageChanged} />
+                <div className={s.Preloader}>{this.props.isUpload ? <Preloader /> : null}</div>
+                <Users users={this.props.users} pageSize={this.props.pageSize} totalUserCount={this.props.totalUserCount} currentPage={this.props.currentPage} followAC={this.props.followAC} unfollowAC={this.props.unfollowAC} onPageChanged={this.onPageChanged} isFollowing={this.props.isFollowing} toggleIsFollowing={this.props.toggleIsFollowing} />
             </div>
         )
     }
@@ -42,7 +45,8 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
-        isUpload: state.usersPage.isUpload
+        isUpload: state.usersPage.isUpload, 
+        isFollowing: state.usersPage.isFollowing
     }
 }
 // const mapDispatchToProps = (dispatch) => {
@@ -54,6 +58,6 @@ const mapStateToProps = (state) => {
 //         setTotalUserCount: (count)=>{dispatch(setTotalUserCount(count))} 
 //     }
 // }
-const UsersContainer = connect(mapStateToProps, { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsUpload })(UsersComponent);
+const UsersContainer = connect(mapStateToProps, { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsUpload, toggleIsFollowing })(UsersComponent);
 
 export default UsersContainer;

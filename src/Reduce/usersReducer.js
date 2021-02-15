@@ -3,14 +3,16 @@ const FOLLOW = 'FOLLOW',
     SET_USERS = 'SET_USERS',
     SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
     SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT',
-    TOGGLE_IS_UPLOAD = 'TOGGLE_IS_UPLOAD';
+    TOGGLE_IS_UPLOAD = 'TOGGLE_IS_UPLOAD',
+    TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING';
 
 let initialState = {
     users: [],
     pageSize: 5,
     totalUserCount: 21,
     currentPage: 1,
-    isUpload: false
+    isUpload: false,
+    isFollowing: []
 };
 
 export const followAC = (id) => {
@@ -51,6 +53,14 @@ export const toggleIsUpload = (isUpload) => {
     return {
         type: TOGGLE_IS_UPLOAD,
         isUpload
+    }
+}
+
+export const toggleIsFollowing = (isUpload, userId) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING,
+        isUpload,
+        userId
     }
 }
 
@@ -95,8 +105,13 @@ const usersReducer = (state = initialState, action) => {
                                 return {
                                     ...state, isUpload: action.isUpload
                                 }
-                                default:
-                                    return state;
+                                case TOGGLE_IS_FOLLOWING:
+                                    return {
+                                        ...state, isFollowing:
+                                            action.isUpload ? [...state.isFollowing, action.userId] : [state.isFollowing.filter(id => id !== action.userId)]
+                                    }
+                                    default:
+                                        return state;
     }
 }
 
