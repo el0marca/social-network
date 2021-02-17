@@ -1,5 +1,9 @@
+import {
+    usersAPI
+} from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA',
-      SET_USER_PROFILE_PHOTO = 'SET_USER_PROFILE_PHOTO';
+    SET_USER_PROFILE_PHOTO = 'SET_USER_PROFILE_PHOTO';
 
 let initialState = {
     id: null,
@@ -14,10 +18,22 @@ export const setAuthUserData = (data) => ({
     data: data
 })
 
-export const setAuthProfilePhoto =(photo)=>({
+export const setAuthProfilePhoto = (photo) => ({
     type: SET_USER_PROFILE_PHOTO,
     photo
 })
+
+export const setAuthThunkCreator = () => {
+    return (dispatch) => {
+        usersAPI.setAuth().then(response => {
+            if (response.resultCode === 0) {
+                dispatch(setAuthUserData(response.data));
+                usersAPI.getProfile(response.data.id)
+                    .then(response => dispatch(setAuthProfilePhoto(response.photos)))
+            }
+        })
+    }
+}
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -25,12 +41,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state, ...action.data, isLogged: true
             }
-        case SET_USER_PROFILE_PHOTO:
-            return {
-                ...state, profilePhoto:action.photo
-            }
-            default:
-                return state
+            case SET_USER_PROFILE_PHOTO:
+                return {
+                    ...state, profilePhoto: action.photo
+                }
+                default:
+                    return state
     }
 }
 

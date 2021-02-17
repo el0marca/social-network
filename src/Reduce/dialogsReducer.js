@@ -44,13 +44,25 @@ let initialState = {
     newMessageText: '',
 };
 
-export const newMessageActionCreator = () => ({
+export const sendNewMessageAC = () => ({
     type: 'NEW-MESSAGE'
 });
-export const updateNewMessageTextActionCreator = (text) => ({
+export const updateNewMessageTextAC = (text) => ({
     type: 'UPDATE-NEW-MESSAGE-TEXT',
     newText: text
 });
+
+export const sendNewMessage=()=>{
+    return (dispatch)=>{
+        dispatch(sendNewMessageAC())
+    }
+};
+
+export const updateNewMessageText=(text)=>{
+    return (dispatch)=>{
+        dispatch(updateNewMessageTextAC(text))
+    }
+};
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
