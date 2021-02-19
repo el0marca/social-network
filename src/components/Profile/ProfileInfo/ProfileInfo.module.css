@@ -41,3 +41,9 @@
     margin-top: 20%;
     margin-left: 45%;
 }
+
+.status {
+    width: 100px;
+    height: 10px;
+    background-color: yellow;
+}

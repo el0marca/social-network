@@ -1,24 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsFollowing, getUsersThunkCreator, setUnfollowThunkCreator, setFollowThunkCreator } from '../../Reduce/usersReducer';
+import { setCurrentPage, setTotalUserCount, setUsersAC, toggleIsFollowing, getUsers, setUnfollowUser, setFollowUser } from '../../Reduce/usersReducer';
 import Users from './Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './UsersContainer.module.css'
+import { compose } from 'redux';
+import { WithAuthRedirect } from '../Hoc/WithAuthRedirect';
+
 class UsersComponent extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.getUsersThunkCreator(this.props.pageSize, this.props.currentPage)
-        }
-    }
-    onPageChanged = (currentPage) => {
-        this.props.getUsersThunkCreator(this.props.pageSize, currentPage)
-    }
+            this.props.getUsers(this.props.pageSize, this.props.currentPage)
+        } }
 
     render() {
         return (
             <div className={s.wrapper}>
                 <div className={s.Preloader}>{this.props.isFetching ? <Preloader /> : null}</div>
-                <Users users={this.props.users} pageSize={this.props.pageSize} totalUserCount={this.props.totalUserCount} currentPage={this.props.currentPage} followAC={this.props.followAC} unfollowAC={this.props.unfollowAC} onPageChanged={this.onPageChanged} isFollowing={this.props.isFollowing} toggleIsFollowing={this.props.toggleIsFollowing} setUnfollowThunkCreator={this.props.setUnfollowThunkCreator} setFollowThunkCreator={this.props.setFollowThunkCreator} />
+                <Users {...this.props} />
             </div>
         )
     }
@@ -34,15 +33,8 @@ const mapStateToProps = (state) => {
         isFollowing: state.usersPage.isFollowing
     }
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         followUser: (userId) => { dispatch(followAC(userId)) },
-//         unfollowUser: (userId) => { dispatch(unfollowAC(userId)) },
-//         setUsers: (users) => { dispatch(setUsersAC(users)) },
-//         setCurrentPage: (currentPage) => { dispatch(setCurrentPage(currentPage)) },
-//         setTotalUserCount: (count)=>{dispatch(setTotalUserCount(count))} 
-//     }
-// }
-const UsersContainer = connect(mapStateToProps, { followAC, unfollowAC, setCurrentPage, setTotalUserCount, setUsersAC, toggleIsFollowing, getUsersThunkCreator, setUnfollowThunkCreator, setFollowThunkCreator })(UsersComponent);
 
-export default UsersContainer;
+export default compose(
+    WithAuthRedirect,
+    connect(mapStateToProps, { setCurrentPage, setTotalUserCount, setUsersAC, toggleIsFollowing, getUsers, setUnfollowUser, setFollowUser })
+)(UsersComponent)

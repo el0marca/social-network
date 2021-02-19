@@ -4,8 +4,6 @@ import Dialog from './Dialog/Dialog';
 import Messages from './Message/Message';
 
 const Dialogs = (props) => {
-    console.log(props)
-
     const messagesData= props.messagesData.map(d => <Messages key={d.id} message={d.message} />);
     const dialogsData= props.dialogsData.map(dialog => <Dialog name={dialog.name} key={dialog.id} img={dialog.img} />);
 

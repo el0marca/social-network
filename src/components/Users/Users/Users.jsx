@@ -13,18 +13,19 @@ const Users = (props) => {
     return (
         <div className={s.content}>
             <div>
-                {pages.map((p) => { return <span onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.selectedPage}>{p}</span> })}
+                {pages.map((p) => { return <span onClick={() => props.getUsers(props.pageSize,p)} className={props.currentPage === p && s.selectedPage}>{p}</span> })}
             </div>
-            {props.users.map(u => { 
+            {props.users.map(u => {
                 return <div className={s.wrapper}> <div className={s.ava}>
                     <NavLink to={`profile/${u.id}`}><img src={u.photos.small ? u.photos.small : userPhoto} alt="avatar" /></NavLink>
-                    {u.followed ? <button disabled={props.isFollowing.some(id=>id===u.id)} 
-                                       onClick={() => {props.setUnfollowThunkCreator(u.id)
-                    }}>unfollow</button> 
-                    :<button disabled={props.isFollowing.some(id=>id===u.id)} 
-                            onClick={() => { 
-                                props.setFollowThunkCreator(u.id)
-                     }}>follow</button>}
+                    {u.followed ? <button disabled={props.isFollowing.some(id => id === u.id)}
+                        onClick={() => {
+                            props.setUnfollowUser(u.id)
+                        }}>unfollow</button>
+                        : <button disabled={props.isFollowing.some(id => id === u.id)}
+                            onClick={() => {
+                                props.setFollowUser(u.id)
+                            }}>follow</button>}
                 </div>
                     <div className={s.info}>
                         <div>

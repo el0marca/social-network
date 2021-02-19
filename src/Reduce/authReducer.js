@@ -9,7 +9,7 @@ let initialState = {
     id: null,
     login: null,
     email: null,
-    isLogged: false,
+    isAuth: false,
     profilePhoto: null
 }
 
@@ -23,7 +23,7 @@ export const setAuthProfilePhoto = (photo) => ({
     photo
 })
 
-export const setAuthThunkCreator = () => {
+export const getAuthUserData = () => {
     return (dispatch) => {
         usersAPI.setAuth().then(response => {
             if (response.resultCode === 0) {
@@ -39,7 +39,7 @@ const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
-                ...state, ...action.data, isLogged: true
+                ...state, ...action.data, isAuth: true
             }
             case SET_USER_PROFILE_PHOTO:
                 return {

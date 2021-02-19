@@ -1,12 +1,12 @@
 // import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthUserData, setAuthProfilePhoto, setAuthThunkCreator } from '../../Reduce/authReducer';
+import { setAuthUserData, setAuthProfilePhoto, getAuthUserData } from '../../Reduce/authReducer';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        this.props.setAuthThunkCreator()
+        this.props.getAuthUserData()
     }
     render() {
         return (
@@ -16,8 +16,8 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    isLogged: state.auth.isLogged,
+    isLogged: state.auth.isAuth,
     profilePhoto:state.auth.profilePhoto
 })
 
-export default connect(mapStateToProps, { setAuthUserData, setAuthProfilePhoto, setAuthThunkCreator })(HeaderContainer)
+export default connect(mapStateToProps, { setAuthUserData, setAuthProfilePhoto, getAuthUserData })(HeaderContainer)

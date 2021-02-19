@@ -1,29 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { sendNewMessage, updateNewMessageText } from '../../Reduce/dialogsReducer';
+import { WithAuthRedirect } from '../Hoc/WithAuthRedirect';
 import Dialogs from './Dialogs';
 
 let mapStateToProps = (state) => {
     return {
         messagesData: state.dialogsPage.messages,
         dialogsData: state.dialogsPage.dialogs,
-        newMessageText: state.dialogsPage.newMessageText
+        newMessageText: state.dialogsPage.newMessageText,
     }
 };
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         newMessage: () => {
-//             dispatch(newMessageActionCreator())
-//         },
-//         postChange: (text) => {
-//             dispatch(updateNewMessageTextActionCreator(text))
-//         }
-//     }
-// }
 
-const ContainerWithRouter=withRouter(Dialogs)
-
-export const DialogsContainerWR = connect(mapStateToProps, {sendNewMessage, updateNewMessageText})(ContainerWithRouter)
-
+export default compose(
+    connect(mapStateToProps, { sendNewMessage, updateNewMessageText }),
+    WithAuthRedirect)(Dialogs)
