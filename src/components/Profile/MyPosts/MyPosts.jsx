@@ -1,37 +1,41 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../../../common/FormsControls/FormsControls';
+import { maxLength, required } from '../../../utils/validators';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 
+    const maxLength50 = maxLength(50)
+
+const MyPostsForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder='Enter your message' name='newPostBody' type='post' component={Textarea} validate={[required, maxLength50]} />
+            </div>
+            <div>
+                <button>send</button>
+            </div>
+        </form>
+    )
+}
+const ReduxMyPostForm = reduxForm({ form: 'adPost' })(MyPostsForm)
+
 const MyPosts = (props) => {
-    // const newPostElement = React.createRef();
-
-    // const onPostChange=()=>{
-    //     let text = newPostElement.current.value;
-    //     props.updatePostText(text)
-    // }
-
-    const postsData=props.posts.map(post=><Post key={post.id} message={post.message} likesCount={post.likesCount}/>);
- 
+    const onSubmit = (formData) => props.updateNewPost(formData.newPostBody)
+    const postsData = props.posts.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount} />);
     return (
         <div className={s.myPosts}>
             <div>
                 <h3>My posts</h3>
-                <textarea placeholder='Enter your message' /* ref={newPostElement} */   onChange={(e)=>props.updatePostText(e.target.value)} value={props.newPostText}></textarea>
-                <p><button onClick={()=>props.sendNewPost()}>send</button></p>
+                <ReduxMyPostForm onSubmit={onSubmit} {...props} />
             </div>
             <div className={s.item}>
                 {postsData}
             </div>
-        </div> ) 
-    }
+        </div>)
+}
 
-// создаем const newPostElement = React.createRef(); =>
-//  помещаем ref={newPostElement} в тег ввода(textarea, input и др.) 
-// создаем const onPostChange=()=>{
-    //     let text = newPostElement.current.value;
-    //     props.updateNewPostText(text)
-    // } который следит за изменением в поле ввода и помещает его value в state =>
-// к кнопке прикрекляем onClick={props.newPost}, который закрепляет сообщение newPostText в state 
-  
+
 
 export default MyPosts

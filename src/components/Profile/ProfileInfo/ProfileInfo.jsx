@@ -5,9 +5,7 @@ import profilePhoto from '../../../assets/images/user.jpg'
 import Status from './Status/Status';
 
 class ProfileInfo extends React.Component {
-    
     render() {
-
         if (!this.props.profile) {
             return (<div className={s.preloader}><Preloader /></div>)
         }

@@ -12,4 +12,4 @@ import store from './redux/reduxStore.js';
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
-      );
+      )

@@ -44,42 +44,31 @@ let initialState = {
     newMessageText: '',
 };
 
-export const sendNewMessageAC = () => ({
-    type: 'NEW-MESSAGE'
-});
-export const updateNewMessageTextAC = (text) => ({
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newText: text
+const sendNewMessageAC = (text) => ({
+    type: 'NEW-MESSAGE',
+    text
 });
 
-export const sendNewMessage=()=>{
-    return (dispatch)=>{
-        dispatch(sendNewMessageAC())
+
+export const sendNewMessage = (text) => {
+    return (dispatch) => {
+        dispatch(sendNewMessageAC(text))
     }
 };
-
-export const updateNewMessageText=(text)=>{
-    return (dispatch)=>{
-        dispatch(updateNewMessageTextAC(text))
-    }
-};
-
+let i=4;
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'NEW-MESSAGE':
+            i++;
             return {
                 ...state, messages: [...state.messages, {
-                    id: 5,
-                    message: state.newMessageText
-                }], newMessageText: ''
+                    'id':i,
+                    message: action.text
+                }]
             }
-            case 'UPDATE-NEW-MESSAGE-TEXT':
-                return {
-                    ...state, newMessageText: action.newText
-                }
                 default:
                     return state;
     }
-} 
+}
 
 export default dialogsReducer

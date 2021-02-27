@@ -4,7 +4,6 @@ import {
 
 const SET_USER_PROFILE = 'SET_USER_PROFILE',
     NEW_POST = 'NEW_POST',
-    UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT',
     SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
 
 let initialState = {
@@ -34,12 +33,9 @@ let initialState = {
     status: ''
 };
 
-const NewPostAC = () => ({
-    type: NEW_POST
-});
-const UpdateNewPostTextAC = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
+const NewPostAC = (newPostText) => ({
+    type: NEW_POST,
+    newPostText,
 });
 const setUserProfileAC = (profile) => ({
     type: SET_USER_PROFILE,
@@ -51,18 +47,11 @@ export const setStatusAC = (status) => ({
     status
 })
 
-export const sendNewPost = () => {
+export const updateNewPost = (newPostText) => {
     return (dispatch) => {
-        dispatch(NewPostAC())
+        dispatch(NewPostAC(newPostText))
     }
 }
-
-export const updatePostText = (text) => {
-    return (dispatch) => {
-        dispatch(UpdateNewPostTextAC(text))
-    }
-}
-
 
 export const uploadUserProfile = (userId) => {
     return (dispatch) => {
@@ -93,14 +82,9 @@ const profileReducer = (state = initialState, action) => {
         case NEW_POST:
             return {
                 ...state, posts: [...state.posts, {
-                    message: state.newPostText,
+                    message: action.newPostText,
                     likesCount: 0
-                }], newPostText: ''
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
+                }]
             }
         case SET_USER_PROFILE:
             return {

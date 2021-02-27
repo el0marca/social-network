@@ -1,0 +1,11 @@
+.required textarea{
+    border: 2px solid red;
+}
+
+.required input {
+    border: 2px solid red;
+}
+
+.required {
+    border: 2px solid red
+}
